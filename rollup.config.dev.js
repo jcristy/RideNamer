@@ -4,7 +4,7 @@ import { terser } from 'rollup-plugin-terser';
 export default {
   input: './src/registerPlugin.ts',
   output: {
-    file: '~/.config/openrct2/plugin/RideNamer.js',
+    file: '/home/john/.config/OpenRCT2/plugin/RideNamer.js',
     format: 'iife',
   },
   plugins: [
