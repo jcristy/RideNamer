@@ -3,9 +3,9 @@
 import main from './main';
 
 registerPlugin({
-  name: 'MOD_NAME',
+  name: 'RideNamer',
   version: '1.0',
-  authors: ['MOD_AUTHOR'],
+  authors: ['jcristy'],
   type: 'local',
   licence: 'MIT',
   main,
