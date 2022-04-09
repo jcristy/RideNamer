@@ -4,9 +4,9 @@ import main from './main';
 
 registerPlugin({
   name: 'RideNamer',
-  version: '1.0',
+  version: '0.1',
   authors: ['jcristy'],
-  type: 'local',
+  type: 'remote',
   licence: 'MIT',
   main,
 });
