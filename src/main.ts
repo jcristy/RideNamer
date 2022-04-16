@@ -2,12 +2,18 @@ import {
 	IsRollerCoaster
 } from './helpers';
 
+import { 
+	GetRandomName,
+	rcDefaultNameList
+} from './names';
+
 const main = (): void => {
   console.log(`Your plug-in has started!`);
 
 };
 
 const boringNameRegex : RegExp = /.*1/;
+
 
 // Day's check for stalls to name
 var daySubscription =
@@ -25,10 +31,8 @@ var rideRatingSubscription =
 				case "ride": 
 					let rideDefinition: RideObject = iride.object
 					if (IsRollerCoaster(rideDefinition.rideType[0])) { // not sure why it's an array nor what's in the other 2 elements that seemed to always be 255
-						console.log('a roller coaster');
 						if (boringNameRegex.test(iride.name)) {
-							console.log('had a boring name');
-							iride.name = 'a cool name';
+							iride.name = GetRandomName();
 						}
 						
 					} else {
@@ -38,8 +42,9 @@ var rideRatingSubscription =
 					
 					break;
 				case "stall": 
-					break;
 				case "facility": 
+					// Find the nearest roller coaster - name it after that, remove the # at the end
+					break;
 			}
 			// if it's a stall, do nothing
 
