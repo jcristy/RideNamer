@@ -1,10 +1,10 @@
 import {
-	IsRollerCoaster
+	IsRollerCoaster,
+	FindNearestRollerCoaster
 } from './helpers';
 
 import { 
-	GetRandomName,
-	rcDefaultNameList
+	GetRandomName
 } from './names';
 
 const main = (): void => {
@@ -12,7 +12,8 @@ const main = (): void => {
 
 };
 
-const boringNameRegex : RegExp = /.*1/;
+const boringRollerCoasterNameRegex : RegExp = /.*1/;
+const boringStallNameRegex : RegExp = /(.*) 1/;
 
 
 // Day's check for stalls to name
@@ -25,13 +26,13 @@ var rideRatingSubscription =
         context.subscribe('ride.ratings.calculate', function() {
 		console.log('A ride has been rated');
   		let rides: Ride[] = map.rides
+		// TODO do the roller coasters first; then stalls
 		for (let iride of rides) {
 			console.log(`Ride ${iride.name} type ${iride.classification} exc ${iride.excitement}`);
 			switch (iride.classification){
 				case "ride": 
-					let rideDefinition: RideObject = iride.object
-					if (IsRollerCoaster(rideDefinition.rideType[0])) { // not sure why it's an array nor what's in the other 2 elements that seemed to always be 255
-						if (boringNameRegex.test(iride.name)) {
+					if (IsRollerCoaster(iride)) { 
+						if (boringRollerCoasterNameRegex.test(iride.name)) {
 							iride.name = GetRandomName();
 						}
 						
@@ -44,6 +45,12 @@ var rideRatingSubscription =
 				case "stall": 
 				case "facility": 
 					// Find the nearest roller coaster - name it after that, remove the # at the end
+					var result = boringStallNameRegex.exec(iride.name)
+					if (result != null) {
+						// Find nearest coaster
+						let nearestRC: Ride = FindNearestRollerCoaster(iride, rides);
+						iride.name = nearestRC.name + "'s " + result[1];
+					}
 					break;
 			}
 			// if it's a stall, do nothing
