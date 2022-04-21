@@ -16,7 +16,7 @@ export function IsRollerCoaster(ride: Ride) : boolean {
 }
 
 // FindNearestRollerCoaster finds the nearest roller coaster for the given Ride
-export function FindNearestRollerCoaster(ride: Ride, ridesInPark: Ride[]) : Ride {
+export function FindNearestRollerCoaster(ride: Ride, ridesInPark: Ride[]) : [Ride,number] {
 	let closestRide: Ride = null;
 	let shortestDistance: number = 1000000000;
 	let thisLocation: CoordsXYZ = ride.stations[0].entrance; 
@@ -37,5 +37,5 @@ export function FindNearestRollerCoaster(ride: Ride, ridesInPark: Ride[]) : Ride
 			closestRide = iride;
 		}	
 	}
-	return closestRide
+	return [closestRide,shortestDistance]
 }
