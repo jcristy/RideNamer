@@ -3,10 +3,10 @@
 import main from './main';
 
 registerPlugin({
-  name: 'RideNamer',
-  version: '0.1',
-  authors: ['jcristy'],
-  type: 'remote',
-  licence: 'MIT',
-  main,
+name: 'RideNamer',
+version: '0.1',
+authors: ['jcristy'],
+type: 'remote',
+licence: 'MIT',
+main,
 });
