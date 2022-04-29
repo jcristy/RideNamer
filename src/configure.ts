@@ -9,7 +9,7 @@ export class PluginConfig {
 	constructor(){
 		this.nameRollerCoasters = true;
 		this.nameStallsAfterCoasters = true;
-		this.removeNumberFromFlatRides = true;
+		this.removeNumberFromFlatRides = false;
 		this.rollerCoasterNameList = {"generic":rcGenericDefaultNameList};
 	}
 }
@@ -19,16 +19,15 @@ export var myConfig: PluginConfig;
 const pluginConfigPath: string = "jcristy.ridenamer.config";
 
 export function LoadConfig() {
-	//let rawConfig: string = context.sharedStorage.get(pluginConfigPath);
 	myConfig = context.sharedStorage.get(pluginConfigPath);
-//	if (!rawConfig) {
 	if (!myConfig) {
 		myConfig = new PluginConfig();
-		//context.sharedStorage.set(pluginConfigPath, JSON.stringify(myConfig));
-		context.sharedStorage.set(pluginConfigPath, myConfig);
-	} else {
-//		myConfig = JSON.parse(rawConfig);
-	}
+		save();
+	} 
+}
+
+function save() {
+	context.sharedStorage.set(pluginConfigPath, myConfig);
 }
 
 var handle = undefined;
@@ -37,7 +36,7 @@ export function OpenConfigureUI() {
 	if (handle !== undefined)
 		return;
 	let row: number = 0;
-	let layout: GridLayout = new GridLayout(5,1,150,256);
+	let layout: GridLayout = new GridLayout(6,1,224,256);
 	let widgets:Widget[] = [
 		layout.DoMe({
 			type: "label",
@@ -45,24 +44,48 @@ export function OpenConfigureUI() {
 		}),
 		layout.DoMe({
 			type: "checkbox",
-			text: "Name Roller Coasters"
+			text: "Name Roller Coasters",
+			isChecked: myConfig.nameRollerCoasters,
+			onChange: function(isChecked) {
+				myConfig.nameRollerCoasters = isChecked;
+				save();
+			},
 		}),
 		layout.DoMe({
 			type: "checkbox",
-			text: "Name stalls after Roller Coasters"
+			text: "Name stalls after Roller Coasters",
+			isChecked: myConfig.nameStallsAfterCoasters,
+			onChange: function(isChecked) {
+				myConfig.nameStallsAfterCoasters = isChecked;
+				save();
+			},
 		}),
 		layout.DoMe({
 			type: "checkbox",
-			text: "Remove number from flat rides"
+			text: "Remove number from flat rides",
+			isChecked: myConfig.removeNumberFromFlatRides,
+			onChange: function(isChecked) {
+				myConfig.removeNumberFromFlatRides = isChecked;
+				save();
+			},
 		}),
 		layout.DoMe({
 			type: "label",
 			text: "Carefully modify the name list in\n <openrct2 user directory>/plugin.store.json"
-		})
+		}),
+		layout.DoMe({
+			type: "button",
+			text: "Restore Defaults",
+			onClick:  function() {
+				myConfig = new PluginConfig();
+				save();
+				handle.close(); // close the window to force reloading the values :-)
+			}
+		}),
 	]
-	ui.openWindow({
+	handle = ui.openWindow({
 		classification: "ride-namer-configure",
-		height: 150,
+		height: 256,
 		width: 256,
 		title: "Ride Namer - Options",
 		onClose: function() {
