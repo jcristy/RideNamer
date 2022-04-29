@@ -27,15 +27,18 @@ export function FindNearestRollerCoaster(ride: Ride, ridesInPark: Ride[]) : [Rid
 		if (iride == ride || !IsRollerCoaster(iride)) {
 			continue;
 		}
-		let candidateLocation: CoordsXYZ = iride.stations[0].entrance
-			let distance: number = Math.sqrt(
-					Math.pow(thisLocation.x - candidateLocation.x, 2) +
-					Math.pow(thisLocation.y - candidateLocation.y, 2)
-					) 
-			if (distance < shortestDistance) {
-				shortestDistance = distance;
-				closestRide = iride;
-			}	
+		let candidateLocation: CoordsXYZ = iride.stations[0].entrance;
+		if (candidateLocation == null) {
+			continue; // ride has no entrance yet, skip
+		}
+		let distance: number = Math.sqrt(
+				Math.pow(thisLocation.x - candidateLocation.x, 2) +
+				Math.pow(thisLocation.y - candidateLocation.y, 2)
+			) 
+		if (distance < shortestDistance) {
+			shortestDistance = distance;
+			closestRide = iride;
+		}	
 	}
 	return [closestRide,shortestDistance]
 }
