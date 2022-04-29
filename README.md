@@ -1,1 +1,28 @@
 # RideNamer
+
+RideNamer helps with the tedious process of giving your rides, stalls, and roller coasters names.
+
+## Description
+
+New roller coasters, or more specifically roller coasters with "Something Something #" are given a random name.
+In turn, stalls nearby are named "Roller Coaster's stall type". Finally, flat rides have the number removed.
+Each of these can be turned off.
+
+The idea is to automatically come up with more real world style naming.
+
+## How To
+
+Currently, there is not an in-game way to adjust the list of pre-defined names. However, you can modify the OpenRCT2 user config to
+adjust the list of names. In Ubuntu, this file, I think, by default is in $HOME/.config/OpenRCT2/plugin.store.json. You can carefully
+edit this file to add or modify the list of names it picks from.
+
+## Roadmap & Known Possible Bugs
+
+* Theme-based naming - nearby scenery used to narrow the list of possible names
+* In-game name list editing
+* Duplicate checking
+* Stall Naming based on default roller coaster name
+
+## Acknowledgements
+
+https://github.com/wisnia74/openrct2-typescript-mod-template
