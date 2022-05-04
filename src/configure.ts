@@ -17,7 +17,7 @@ export class PluginConfig {
 	}
 }
 
-export var myConfig: PluginConfig;
+export var myConfig: PluginConfig; // eslint-disable-line import/no-mutable-exports,no-var
 
 const pluginConfigPath: string = 'jcristy.ridenamer.config';
 
@@ -37,7 +37,6 @@ let handle;
 
 export function OpenConfigureUI() {
   if (handle !== undefined) return;
-  const row: number = 0;
   const layout: GridLayout = new GridLayout(6, 1, 224, 256);
   const widgets:Widget[] = [
     layout.DoMe({
@@ -171,7 +170,7 @@ class GridLayout {
 	}
 }
 
-var rcGenericDefaultNameList: string[] = [
+const rcGenericDefaultNameList: string[] = [ /* eslint-disable vars-on-top */
   'Smiter',
   'Walloper',
   'Tangle',

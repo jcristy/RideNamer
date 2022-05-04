@@ -29,12 +29,14 @@ const boringStallNameRegex : RegExp = /(.*?)( Stall)* 1/;
 const maxStallDistanceForNaming : number = 40 * 32; // A tile is 32 units, I think
 
 // Day's check for stalls to name
-const daySubscription = context.subscribe('interval.day', () => {
-  console.log('A day has passed');
+/*const daySubscription =*/
+context.subscribe('interval.day', () => {
+  //console.log('A day has passed');
 
   const { rides } = map;
   // TODO do the roller coasters first; then stalls
-  for (const iride of rides) {
+  /* eslint-disable no-param-reassign */
+  rides.forEach((iride) => {
     switch (iride.classification) {
       case 'ride':
         if (IsRollerCoaster(iride) && myConfig.nameRollerCoasters) {
@@ -64,8 +66,9 @@ const daySubscription = context.subscribe('interval.day', () => {
           }
         }
         break;
+      default:
     }
-  }
+  });
 });
 
 export default main;
