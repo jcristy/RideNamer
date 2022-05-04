@@ -29,6 +29,7 @@
     "eslint-config-airbnb-base": "^14.2.1",
     "eslint-plugin-import": "^2.22.1",
     "nodemon": "^2.0.15",
+    "prettier": "2.6.2",
     "rollup": "^2.40.0",
     "rollup-plugin-terser": "^7.0.2",
     "tslib": "^2.1.0",
@@ -38,13 +39,16 @@
     "plugins": [
       "@semantic-release/commit-analyzer",
       "@semantic-release/release-notes-generator",
-      ["@semantic-release/github",
+      [
+        "@semantic-release/github",
         {
-          "assets": [
-          ]
+          "assets": []
         }
       ]
     ],
     "preset": "eslint"
+  },
+  "prettier": {
+    "singleQuote": true
   }
 }

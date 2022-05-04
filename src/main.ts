@@ -1,17 +1,8 @@
-import {
-  IsRollerCoaster,
-  FindNearestRollerCoaster,
-} from './helpers';
+import { IsRollerCoaster, FindNearestRollerCoaster } from './helpers';
 
-import {
-  GetRandomName,
-} from './names';
+import GetRandomName from './names';
 
-import {
-  OpenConfigureUI,
-  LoadConfig,
-  myConfig,
-} from './configure';
+import { OpenConfigureUI, LoadConfig, myConfig } from './configure';
 
 const main = (): void => {
   // Load configuration
@@ -23,10 +14,10 @@ const main = (): void => {
   });
 };
 
-const boringRollerCoasterNameRegex : RegExp = /.*1/;
-const boringFlatRideNameRegex : RegExp = /(.*) 1/;
-const boringStallNameRegex : RegExp = /(.*?)( Stall)* 1/;
-const maxStallDistanceForNaming : number = 40 * 32; // A tile is 32 units, I think
+const boringRollerCoasterNameRegex: RegExp = /.*1/;
+const boringFlatRideNameRegex: RegExp = /(.*) 1/;
+const boringStallNameRegex: RegExp = /(.*?)( Stall)* 1/;
+const maxStallDistanceForNaming: number = 40 * 32; // A tile is 32 units, I think
 
 // Day's check for stalls to name
 /*const daySubscription =*/
@@ -41,7 +32,10 @@ context.subscribe('interval.day', () => {
       case 'ride':
         if (IsRollerCoaster(iride) && myConfig.nameRollerCoasters) {
           if (boringRollerCoasterNameRegex.test(iride.name)) {
-            iride.name = GetRandomName('generic', myConfig.rollerCoasterNameList);
+            iride.name = GetRandomName(
+              'generic',
+              myConfig.rollerCoasterNameList,
+            );
           }
         } else if (myConfig.removeNumberFromFlatRides) {
           const result = boringFlatRideNameRegex.exec(iride.name);
@@ -57,7 +51,10 @@ context.subscribe('interval.day', () => {
           const result = boringStallNameRegex.exec(iride.name);
           if (result != null) {
             // Find nearest coaster
-            const searchResult: [Ride, number] = FindNearestRollerCoaster(iride, rides);
+            const searchResult: [Ride, number] = FindNearestRollerCoaster(
+              iride,
+              rides,
+            );
             const distance: number = searchResult[1];
             const nearestRC: Ride = searchResult[0];
             if (distance < maxStallDistanceForNaming) {
