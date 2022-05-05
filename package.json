@@ -52,10 +52,14 @@
         "@semantic-release/github",
         {
           "assets": [
-            "dist"
+            "dist/RideNamer.js"
           ]
         }
-      ]
+      ],
+      ["@semantic-release/git", {
+        "assets": ["package.json"],
+        "message": "Chore: ${nextRelease.version} [skip ci]"
+      }]
     ],
     "preset": "eslint"
   },
