@@ -24,12 +24,14 @@ Currently, there is not an in-game way to adjust the list of pre-defined names. 
 adjust the list of names. In Ubuntu, this file, I think, by default is in `$HOME/.config/OpenRCT2/plugin.store.json`. You can carefully
 edit this file to add or modify the list of names it picks from.
 
-## Roadmap & Known Possible Bugs
+## Roadmap & Known Bugs
 
+### Roadmap
 * Theme-based naming - nearby scenery used to narrow the list of possible names
-* In-game name list editing
-* Duplicate checking
-* Stall Naming based on default roller coaster name
+
+### Bugs
+* Duplicate names possible
+* Stalls could be named after the game's default roller coaster name
 
 ## Acknowledgements
 
