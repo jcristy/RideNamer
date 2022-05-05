@@ -61,7 +61,7 @@
         "@semantic-release/git",
         {
           "assets": [
-            "package.json"
+            "package.json","package-lock.json"
           ],
           "message": "Chore: ${nextRelease.version} [skip ci]"
         }
