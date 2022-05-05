@@ -15,6 +15,7 @@ export class PluginConfig {
     this.nameRollerCoasters = true;
     this.nameStallsAfterCoasters = true;
     this.removeNumberFromFlatRides = false;
+    this.configVersion = 1;
     this.rollerCoasterNameList = { generic: rcGenericDefaultNameList };
   }
 }
