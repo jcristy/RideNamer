@@ -9,7 +9,8 @@
     "build": "npm run lint && rollup --config rollup.config.prod.js",
     "build:dev": "rollup --config rollup.config.dev.js",
     "lint": "eslint ./src --ext .js --ext .ts",
-    "postversion": "npm run build"
+    "postversion": "npm run build",
+    "release": "npx semantic-release --no-ci"
   },
   "repository": {
     "type": "git",
