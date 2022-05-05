@@ -1,6 +1,10 @@
 /// <reference path="../lib/openrct2.d.ts" />
 
+const thisConfigVersion: number = 1;
+
 export class PluginConfig {
+  configVersion: number;
+
   nameRollerCoasters: boolean;
 
   nameStallsAfterCoasters: boolean;
@@ -25,6 +29,9 @@ export function LoadConfig() {
   myConfig = context.sharedStorage.get(pluginConfigPath);
   if (!myConfig) {
     myConfig = new PluginConfig();
+    save();
+  } else if (myConfig.configVersion == null) {
+    myConfig.removeNumberFromFlatRides = false; // Upgrade the configuration definition
     save();
   }
 }
