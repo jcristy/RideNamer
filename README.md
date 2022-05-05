@@ -12,8 +12,16 @@ The idea is to automatically come up with more real world style naming.
 
 ## How To
 
+### Install
+
+Place the ridenamer.js file into the plugins folder.
+* For Windows (untested) `C:Users\{User}\Documents\OpenRCT2\plugin`
+* For Ubuntu and likely other Linux distributions `~/.config/OpenRCT2/plugin`
+
+### Configure Names
+
 Currently, there is not an in-game way to adjust the list of pre-defined names. However, you can modify the OpenRCT2 user config to
-adjust the list of names. In Ubuntu, this file, I think, by default is in $HOME/.config/OpenRCT2/plugin.store.json. You can carefully
+adjust the list of names. In Ubuntu, this file, I think, by default is in `$HOME/.config/OpenRCT2/plugin.store.json`. You can carefully
 edit this file to add or modify the list of names it picks from.
 
 ## Roadmap & Known Possible Bugs
