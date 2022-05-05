@@ -1,7 +1,5 @@
 /// <reference path="../lib/openrct2.d.ts" />
 
-const thisConfigVersion: number = 1;
-
 export class PluginConfig {
   configVersion: number;
 
