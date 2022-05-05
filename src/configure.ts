@@ -41,7 +41,7 @@ export function OpenConfigureUI() {
   const widgets: Widget[] = [
     layout.DoMe({
       type: 'label',
-      text: 'Because rides deserve names',
+      text: 'Because rides deserve names [VI]{version}',
     }),
     layout.DoMe({
       type: 'checkbox',
