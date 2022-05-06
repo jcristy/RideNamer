@@ -35,8 +35,8 @@ export function FindNearestRollerCoaster(
       return;
     }
     const candidateLocation: CoordsXYZ = iride.stations[0].entrance;
-    if (candidateLocation == null) {
-      return; // ride has no entrance yet, skip
+    if (candidateLocation == null || thisLocation == null) {
+      return; // target or candidate ride has no entrance yet, skip
     }
     const distance: number = Math.sqrt(
       (thisLocation.x - candidateLocation.x) ** 2
