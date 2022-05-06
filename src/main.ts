@@ -28,6 +28,9 @@ context.subscribe('interval.day', () => {
   // TODO do the roller coasters first; then stalls
   /* eslint-disable no-param-reassign */
   rides.forEach((iride) => {
+    if (myConfig == null) {
+       return; // try again later something odd is happening
+    }
     switch (iride.classification) {
       case 'ride':
         if (IsRollerCoaster(iride) && myConfig.nameRollerCoasters) {
