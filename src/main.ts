@@ -29,7 +29,7 @@ context.subscribe('interval.day', () => {
   /* eslint-disable no-param-reassign */
   rides.forEach((iride) => {
     if (myConfig == null) {
-       return; // try again later something odd is happening
+      return; // try again later something odd is happening
     }
     switch (iride.classification) {
       case 'ride':
