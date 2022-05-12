@@ -12,12 +12,25 @@ const main = (): void => {
   ui.registerMenuItem('Configure RideNamer', () => {
     OpenConfigureUI();
   });
+
+  ui.registerShortcut({
+    id: "ridenamer.rename",
+    text: "[RideNamer] Rename Last Named Ride",
+    bindings: [],
+    callback: function() {
+      const { rides } = map;
+      nameRollerCoaster(rides, lastNamedCoaster);
+    },
+  });
 };
 
 const boringRollerCoasterNameRegex: RegExp = /.*1/;
 const boringFlatRideNameRegex: RegExp = /(.*) 1/;
 const boringStallNameRegex: RegExp = /(.*?)( Stall)* 1/;
 const maxStallDistanceForNaming: number = 40 * 32; // A tile is 32 units, I think
+
+// Tracked to allow bumping the name
+var lastNamedCoaster: Ride;
 
 // Day's check for stalls to name
 /*const daySubscription =*/
@@ -27,7 +40,7 @@ context.subscribe('interval.day', () => {
   const { rides } = map;
   // TODO do the roller coasters first; then stalls
   /* eslint-disable no-param-reassign */
-  rides.forEach((iride) => {
+  rides.forEach((iride: Ride) => {
     if (myConfig == null) {
       return; // try again later something odd is happening
     }
@@ -35,16 +48,7 @@ context.subscribe('interval.day', () => {
       case 'ride':
         if (IsRollerCoaster(iride) && myConfig.nameRollerCoasters) {
           if (boringRollerCoasterNameRegex.test(iride.name)) {
-            iride.name = GetRandomName(
-              'generic',
-              myConfig.rollerCoasterNameList,
-            );
-	    const isDuplicate: boolean = rides.some((jride) => {
-              return jride.name === iride.name;
-            });
-            if (isDuplicate) {
-              iride.name = "Spawn of " + iride.name;
-            }
+            nameRollerCoaster(rides, iride);
           }
         } else if (myConfig.removeNumberFromFlatRides) {
           const result = boringFlatRideNameRegex.exec(iride.name);
@@ -77,5 +81,23 @@ context.subscribe('interval.day', () => {
     }
   });
 });
+
+// nameRollerCoaster finds a random name for rideToName and names it
+function nameRollerCoaster(rides: Ride[], rideToName: Ride) {
+  if (rideToName == null) {
+    return;
+  }
+  rideToName.name = GetRandomName(
+    'generic',
+    myConfig.rollerCoasterNameList,
+  );
+  const isDuplicate: boolean = rides.some((jride) => {
+    return jride.name === rideToName.name;
+  });
+  if (isDuplicate) {
+    rideToName.name = "Spawn of " + rideToName.name;
+  }
+  lastNamedCoaster = rideToName;
+}
 
 export default main;
