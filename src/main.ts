@@ -39,6 +39,12 @@ context.subscribe('interval.day', () => {
               'generic',
               myConfig.rollerCoasterNameList,
             );
+	    const isDuplicate: boolean = rides.some((jride) => {
+              return jride.name === iride.name;
+            });
+            if (isDuplicate) {
+              iride.name = "Spawn of " + iride.name;
+            }
           }
         } else if (myConfig.removeNumberFromFlatRides) {
           const result = boringFlatRideNameRegex.exec(iride.name);
