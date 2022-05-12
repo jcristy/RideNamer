@@ -92,7 +92,7 @@ function nameRollerCoaster(rides: Ride[], rideToName: Ride) {
     myConfig.rollerCoasterNameList,
   );
   const isDuplicate: boolean = rides.some((jride) => {
-    return jride.name === rideToName.name;
+    return jride.id != rideToName.id && jride.name === rideToName.name;
   });
   if (isDuplicate) {
     rideToName.name = "Spawn of " + rideToName.name;
