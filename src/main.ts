@@ -66,7 +66,8 @@ context.subscribe('interval.day', () => {
             );
             const distance: number = searchResult[1];
             const nearestRC: Ride = searchResult[0];
-            if (distance < maxStallDistanceForNaming) {
+            const nearestRCHasGoodName: boolean = !boringRollerCoasterNameRegex.test(nearestRC.name);
+            if (distance < maxStallDistanceForNaming && nearestRCHasGoodName) {
               iride.name = `${nearestRC.name}'s ${result[1]}`;
             }
           }
