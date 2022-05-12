@@ -14,10 +14,10 @@ const main = (): void => {
   });
 
   ui.registerShortcut({
-    id: "ridenamer.rename",
-    text: "[RideNamer] Rename Last Named Ride",
+    id: 'ridenamer.rename',
+    text: '[RideNamer] Rename Last Named Ride',
     bindings: [],
-    callback: function() {
+    callback() {
       const { rides } = map;
       nameRollerCoaster(rides, lastNamedCoaster);
     },
@@ -30,7 +30,7 @@ const boringStallNameRegex: RegExp = /(.*?)( Stall)* 1/;
 const maxStallDistanceForNaming: number = 40 * 32; // A tile is 32 units, I think
 
 // Tracked to allow bumping the name
-var lastNamedCoaster: Ride;
+let lastNamedCoaster: Ride;
 
 // Day's check for stalls to name
 /*const daySubscription =*/
@@ -91,11 +91,11 @@ function nameRollerCoaster(rides: Ride[], rideToName: Ride) {
     'generic',
     myConfig.rollerCoasterNameList,
   );
-  const isDuplicate: boolean = rides.some((jride) => {
-    return jride.id != rideToName.id && jride.name === rideToName.name;
+  const isDuplicate: boolean = rides.some((jride) => { // eslint-disable-line arrow-body-style
+    return jride.id !== rideToName.id && jride.name === rideToName.name;
   });
   if (isDuplicate) {
-    rideToName.name = "Spawn of " + rideToName.name;
+    rideToName.name = `Spawn of ${rideToName.name}`;
   }
   lastNamedCoaster = rideToName;
 }
