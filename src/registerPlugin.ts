@@ -4,7 +4,7 @@ import main from './main';
 
 registerPlugin({
   name: 'RideNamer',
-  version: '0.1',
+  version: '[VI]{version}[/VI]',
   authors: ['jcristy'],
   type: 'remote',
   licence: 'MIT',
