@@ -41,7 +41,12 @@
   },
   "release": {
     "plugins": [
-      "@semantic-release/commit-analyzer",
+      [
+        "@semantic-release/commit-analyzer",
+        {
+          "preset": "eslint"
+        }
+      ],
       "@semantic-release/release-notes-generator",
       [
         "@semantic-release/npm",
@@ -67,8 +72,7 @@
           "message": "Chore: ${nextRelease.version} [skip ci]"
         }
       ]
-    ],
-    "preset": "eslint"
+    ]
   },
   "prettier": {
     "singleQuote": true
