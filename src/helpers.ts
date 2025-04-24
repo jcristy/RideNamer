@@ -9,6 +9,7 @@ export function IsRollerCoaster(ride: Ride): boolean {
   const rollerCoasterTypes: number[] = [
     0, 1, 2, 3, 4, 7, 9, 10, 13, 15, 17, 19, 42, 44, 51, 52, 53, 54, 55, 56, 57,
     58, 59, 62, 64, 65, 66, 68, 73, 74, 75, 76, 86, 87, 91, 92, 94, 95, 96, 97,
+    98, 99, 100, 101, 102
   ];
   const found: boolean = rollerCoasterTypes.some((rct) => {
     if (rideType < rct + 0.01 && rideType > rct - 0.01) {
