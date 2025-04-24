@@ -43,11 +43,9 @@ export default [
         node: { extensions: ['.js', '.ts'] },
       },
     },
-    {
     ignores: [
       '**/lib/**',
       '**/dist/**'
     ]
-    }
   },
 ];
