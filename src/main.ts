@@ -35,13 +35,13 @@ let lastNamedCoaster: Ride;
 // Day's check for stalls to name
 /*const daySubscription =*/
 context.subscribe('interval.day', () => {
-  //console.log('A day has passed');
+  // console.log('A day has passed');
 
   const { rides } = map;
   // TODO do the roller coasters first; then stalls
-  /* eslint-disable no-param-reassign */
   rides.forEach((iride: Ride) => {
     if (myConfig == null) {
+      console.log("null config")
       return; // try again later something odd is happening
     }
     switch (iride.classification) {
@@ -64,10 +64,14 @@ context.subscribe('interval.day', () => {
           const result = boringStallNameRegex.exec(iride.name);
           if (result != null) {
             // Find nearest coaster
-            const searchResult: [Ride, number] = FindNearestRollerCoaster(
+            const searchResult: [Ride|undefined, number] = FindNearestRollerCoaster(
               iride,
               rides,
             );
+            if (searchResult[0] == undefined) {
+              console.log("no coaster found")
+              return;
+            }
             const distance: number = searchResult[1];
             const nearestRC: Ride = searchResult[0];
             const nearestRCHasGoodName: boolean = !boringRollerCoasterNameRegex.test(nearestRC.name);
@@ -91,7 +95,7 @@ function nameRollerCoaster(rides: Ride[], rideToName: Ride) {
     'generic',
     myConfig.rollerCoasterNameList,
   );
-  const isDuplicate: boolean = rides.some((jride) => { // eslint-disable-line arrow-body-style
+  const isDuplicate: boolean = rides.some((jride) => {
     return jride.id !== rideToName.id && jride.name === rideToName.name;
   });
   if (isDuplicate) {

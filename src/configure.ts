@@ -1,4 +1,4 @@
-/// <reference path="../lib/openrct2.d.ts" />
+import {} from 'openrct2';
 
 export class PluginConfig {
   configVersion: number;
@@ -20,16 +20,19 @@ export class PluginConfig {
   }
 }
 
-export var myConfig: PluginConfig; // eslint-disable-line import/no-mutable-exports,no-var
+export var myConfig: PluginConfig;
 
 const pluginConfigPath: string = 'jcristy.ridenamer.config';
 
 export function LoadConfig() {
-  myConfig = context.sharedStorage.get(pluginConfigPath);
-  if (!myConfig) {
+  let possibleConfig: PluginConfig | undefined = context.sharedStorage.get(pluginConfigPath);
+  if (!possibleConfig) {
     myConfig = new PluginConfig();
     save();
-  } else if (myConfig.configVersion == null) {
+    return;
+  } 
+  myConfig = possibleConfig;
+  if (myConfig.configVersion == null) {
     myConfig.removeNumberFromFlatRides = false; // Upgrade the configuration definition
     save();
   }
@@ -39,7 +42,7 @@ function save() {
   context.sharedStorage.set(pluginConfigPath, myConfig);
 }
 
-let handle;
+let handle: Window | undefined;
 
 export function OpenConfigureUI() {
   if (handle !== undefined) return;
@@ -53,7 +56,7 @@ export function OpenConfigureUI() {
       type: 'checkbox',
       text: 'Name Roller Coasters',
       isChecked: myConfig.nameRollerCoasters,
-      onChange(isChecked) {
+      onChange(isChecked: boolean) {
         myConfig.nameRollerCoasters = isChecked;
         save();
       },
@@ -62,7 +65,7 @@ export function OpenConfigureUI() {
       type: 'checkbox',
       text: 'Name stalls after Roller Coasters',
       isChecked: myConfig.nameStallsAfterCoasters,
-      onChange(isChecked) {
+      onChange(isChecked: boolean) {
         myConfig.nameStallsAfterCoasters = isChecked;
         save();
       },
@@ -71,7 +74,7 @@ export function OpenConfigureUI() {
       type: 'checkbox',
       text: 'Remove number from flat rides',
       isChecked: myConfig.removeNumberFromFlatRides,
-      onChange(isChecked) {
+      onChange(isChecked: boolean) {
         myConfig.removeNumberFromFlatRides = isChecked;
         save();
       },
@@ -86,7 +89,9 @@ export function OpenConfigureUI() {
       onClick() {
         myConfig = new PluginConfig();
         save();
-        handle.close(); // close the window to force reloading the values :-)
+        if (handle != undefined) {
+          handle.close(); // close the window to force reloading the values :-)
+        }
       },
     }),
   ];
@@ -108,8 +113,6 @@ interface WidgetSpec {
   Height: number;
   Width: number;
 }
-
-interface SparseWidget {}
 
 class GridLayout {
   Rows: number;
@@ -147,6 +150,7 @@ class GridLayout {
     this.item = -1;
   }
 
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   DoMe(sparseWidget: any): any {
     const spec: WidgetSpec = this.Next();
     sparseWidget.x = spec.X;
@@ -183,7 +187,7 @@ class GridLayout {
 }
 
 const rcGenericDefaultNameList: string[] = [
-  /* eslint-disable vars-on-top */ 'Smiter',
+  'Smiter',
   'Walloper',
   'Tangle',
   'Spire',

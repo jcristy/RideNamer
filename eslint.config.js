@@ -14,13 +14,12 @@ export default [
       ecmaVersion: 2020, // Corresponds to ecmaVersion 11
       sourceType: 'module',
       globals: {
-        ...js.globals.node,
         Atomics: 'readonly',
         SharedArrayBuffer: 'readonly',
       },
       parser: tsParser,
       parserOptions: {
-        project: './tsconfig.json', // Or your tsconfig path
+//        project: './tsconfig.json', // Or your tsconfig path
       },
     },
     rules: {
@@ -29,7 +28,7 @@ export default [
       'no-undef': 'off', // Rule is handled by TypeScript
       'spaced-comment': 'off',
       'max-len': 'off',
-      'import/extensions': ['error', 'always', { js: 'never', ts: 'never' }],
+//      'import/extensions': ['error', 'always', { js: 'never', ts: 'never' }], // gemini threw this at me
       'max-classes-per-file': 'off',
       'prefer-destructuring': 'off',
       'no-plusplus': 'off',

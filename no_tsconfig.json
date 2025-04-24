@@ -1,0 +1,22 @@
+{
+  "compilerOptions": {
+    "target": "es2020",
+    "module": "ESNext",
+    "moduleResolution": "Node",
+    "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true,
+    "strict": true,
+    "skipLibCheck": true,
+    "baseUrl": ".",
+    "paths": {
+      "openrct2": ["lib/openrct2"] // Maps "openrct2" imports to the specified path
+    }
+  },
+  "include": [
+    "src/**/*",           // Include your TypeScript source files (adjust as needed)
+    "lib/**/*.d.ts"      // Explicitly include declaration files in the lib directory
+  ],
+  "exclude": [
+    "node_modules"
+  ]
+}

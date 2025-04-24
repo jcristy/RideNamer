@@ -1,4 +1,4 @@
-/// <reference path="../lib/openrct2.d.ts" />
+import {} from 'openrct2';
 
 export const isUiAvailable = typeof ui !== 'undefined';
 
@@ -24,8 +24,8 @@ export function IsRollerCoaster(ride: Ride): boolean {
 export function FindNearestRollerCoaster(
   ride: Ride,
   ridesInPark: Ride[],
-): [Ride, number] {
-  let closestRide: Ride = null;
+): [Ride | undefined, number] {
+  let closestRide: Ride | undefined;
   let shortestDistance: number = 1000000000;
   let thisLocation: CoordsXYZ = ride.stations[0].entrance;
   if (thisLocation == null) {
