@@ -14,7 +14,6 @@ export default [
       ecmaVersion: 2020, // Corresponds to ecmaVersion 11
       sourceType: 'module',
       globals: {
-        ...js.globals.browser,
         ...js.globals.node,
         Atomics: 'readonly',
         SharedArrayBuffer: 'readonly',
