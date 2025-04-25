@@ -41,7 +41,6 @@ context.subscribe('interval.day', () => {
   // TODO do the roller coasters first; then stalls
   rides.forEach((iride: Ride) => {
     if (myConfig == null) {
-      console.log("null config")
       return; // try again later something odd is happening
     }
     switch (iride.classification) {
