@@ -24,9 +24,9 @@ const main = (): void => {
   });
 };
 
-const boringRollerCoasterNameRegex: RegExp = /.*1/;
-const boringFlatRideNameRegex: RegExp = /(.*) 1/;
-const boringStallNameRegex: RegExp = /(.*?)( Stall)* 1/;
+const boringRollerCoasterNameRegex: RegExp = /.*[0-9]+/;
+const boringFlatRideNameRegex: RegExp = /(.*) [0-9]+/;
+const boringStallNameRegex: RegExp = /(.*?)( Stall)? [0-9]+/;
 const maxStallDistanceForNaming: number = 40 * 32; // A tile is 32 units, I think
 
 // Tracked to allow bumping the name
