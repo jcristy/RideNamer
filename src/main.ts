@@ -75,6 +75,10 @@ context.subscribe('interval.day', () => {
               !boringRollerCoasterNameRegex.test(nearestRC.name);
             if (distance < maxStallDistanceForNaming && nearestRCHasGoodName) {
               iride.name = `${nearestRC.name}'s ${result[1]}`;
+            } else {
+              console.log(
+                'rejecting naming after nearest coaster '+nearestRC.name+', '+distance+' is more than '+maxStallDistanceForNaming+' or coaster still has boring name'
+              );
             }
           }
         }
