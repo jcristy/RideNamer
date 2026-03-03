@@ -63,17 +63,16 @@ context.subscribe('interval.day', () => {
           const result = boringStallNameRegex.exec(iride.name);
           if (result != null) {
             // Find nearest coaster
-            const searchResult: [Ride|undefined, number] = FindNearestRollerCoaster(
-              iride,
-              rides,
-            );
+            const searchResult: [Ride | undefined, number] =
+              FindNearestRollerCoaster(iride, rides);
             if (searchResult[0] == undefined) {
-              console.log("no coaster found")
+              console.log('no coaster found');
               return;
             }
             const distance: number = searchResult[1];
             const nearestRC: Ride = searchResult[0];
-            const nearestRCHasGoodName: boolean = !boringRollerCoasterNameRegex.test(nearestRC.name);
+            const nearestRCHasGoodName: boolean =
+              !boringRollerCoasterNameRegex.test(nearestRC.name);
             if (distance < maxStallDistanceForNaming && nearestRCHasGoodName) {
               iride.name = `${nearestRC.name}'s ${result[1]}`;
             }
@@ -90,10 +89,7 @@ function nameRollerCoaster(rides: Ride[], rideToName: Ride) {
   if (rideToName == null) {
     return;
   }
-  rideToName.name = GetRandomName(
-    'generic',
-    myConfig.rollerCoasterNameList,
-  );
+  rideToName.name = GetRandomName('generic', myConfig.rollerCoasterNameList);
   const isDuplicate: boolean = rides.some((jride) => {
     return jride.id !== rideToName.id && jride.name === rideToName.name;
   });
